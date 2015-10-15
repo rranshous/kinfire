@@ -53,8 +53,7 @@ stream = get_stream(stream_name)
 @route('/<key>', method='POST')
 def body(key):
     data = request.body.read()
-    put_record(kinesis, stream_name, key, data)
-    return ''
+    return "%s" % put_record(kinesis, stream_name, key, data)
 
 @route('/')
 def index():
