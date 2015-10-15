@@ -15,14 +15,6 @@ from random import choice
 from string import lowercase
 from boto.kinesis.exceptions import ResourceNotFoundException
 
-# To preclude inclusion of aws keys into this code, you may temporarily add
-# your AWS credentials to the file:
-#     ~/.boto
-# as follows:
-#     [Credentials]
-#     aws_access_key_id = <your access key>
-#     aws_secret_access_key = <your secret key>
-
 def get_stream(stream_name):
     stream = kinesis.describe_stream(stream_name)
     print (json.dumps(stream, sort_keys=True, indent=2,
@@ -30,7 +22,6 @@ def get_stream(stream_name):
     return stream
 
 def put_record(kinesis, stream, key, record):
-    print("HERE")
     print("Putting: {0} :: {1}".format(key, record))
     response = kinesis.put_record(
         stream_name=stream,
@@ -39,7 +30,6 @@ def put_record(kinesis, stream, key, record):
     return response
 
 def describe_stream(kinesis, stream_name):
-    print("describind stream")
     stream = kinesis.describe_stream(stream_name)
     print (json.dumps(stream, sort_keys=True, indent=2,
         separators=(',', ': ')))
@@ -48,7 +38,6 @@ region_name = 'us-east-1'
 stream_name = os.environ.get("STREAM", "test-stream")
 kinesis = boto.kinesis.connect_to_region(region_name)
 describe_stream(kinesis, stream_name)
-stream = get_stream(stream_name)
 
 @route('/<key>', method='POST')
 def body(key):
