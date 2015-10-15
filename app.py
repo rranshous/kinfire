@@ -54,5 +54,10 @@ stream = get_stream(stream_name)
 def body(key):
     data = request.body.read()
     put_record(kinesis, stream_name, key, data)
+    return ''
+
+@route('/')
+def index():
+    return "STREAM=%s" % stream_name
 
 run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
