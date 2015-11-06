@@ -1,2 +1,4 @@
 http front end to publish to kinesis streams
-leverages https://github.com/kickstarter/telekinesis
+uses boto
+
+includes handler which you can set up as an api gateway accessible lambda
